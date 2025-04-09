@@ -1,0 +1,2 @@
+/usr/bin/ar qc libDCFTable.a CMakeFiles/DCFTable.dir/DCFTable.cpp.o CMakeFiles/DCFTable.dir/players.cpp.o CMakeFiles/DCFTable.dir/keys.cpp.o CMakeFiles/DCFTable.dir/common.cpp.o
+/usr/bin/ranlib libDCFTable.a

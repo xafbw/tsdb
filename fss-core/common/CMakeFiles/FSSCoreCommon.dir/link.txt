@@ -1,0 +1,2 @@
+/usr/bin/ar qc libFSSCoreCommon.a CMakeFiles/FSSCoreCommon.dir/common.cpp.o
+/usr/bin/ranlib libFSSCoreCommon.a

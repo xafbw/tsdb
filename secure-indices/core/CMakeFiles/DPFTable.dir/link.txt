@@ -1,0 +1,2 @@
+/usr/bin/ar qc libDPFTable.a CMakeFiles/DPFTable.dir/DPFTable.cpp.o CMakeFiles/DPFTable.dir/players.cpp.o CMakeFiles/DPFTable.dir/keys.cpp.o CMakeFiles/DPFTable.dir/common.cpp.o
+/usr/bin/ranlib libDPFTable.a

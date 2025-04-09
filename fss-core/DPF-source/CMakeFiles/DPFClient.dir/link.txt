@@ -1,0 +1,2 @@
+/usr/bin/ar qc libDPFClient.a CMakeFiles/DPFClient.dir/DPFClient.cpp.o
+/usr/bin/ranlib libDPFClient.a

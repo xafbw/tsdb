@@ -1,0 +1,2 @@
+/usr/bin/ar qc libDCFClient.a CMakeFiles/DCFClient.dir/DCFClient.cpp.o
+/usr/bin/ranlib libDCFClient.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libquery_proto.a CMakeFiles/query_proto.dir/query.pb.cc.o CMakeFiles/query_proto.dir/query.grpc.pb.cc.o
+/usr/bin/ranlib libquery_proto.a

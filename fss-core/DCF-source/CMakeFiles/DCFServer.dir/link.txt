@@ -1,0 +1,2 @@
+/usr/bin/ar qc libDCFServer.a CMakeFiles/DCFServer.dir/DCFServer.cpp.o
+/usr/bin/ranlib libDCFServer.a

@@ -1,0 +1,6 @@
+/home/user/MyFile/tsdb/network/CMakeFiles/edit_cache.dir
+/home/user/MyFile/tsdb/network/CMakeFiles/rebuild_cache.dir
+/home/user/MyFile/tsdb/network/core/CMakeFiles/protos.dir
+/home/user/MyFile/tsdb/network/core/CMakeFiles/query_proto.dir
+/home/user/MyFile/tsdb/network/core/CMakeFiles/edit_cache.dir
+/home/user/MyFile/tsdb/network/core/CMakeFiles/rebuild_cache.dir

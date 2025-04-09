@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+290d8fd8875d810e68cf5283fb1543ef core/CMakeFiles/protos
+8396d6de3c0f2a6a1ef4e9e2060d51d7 core/query.pb.cc

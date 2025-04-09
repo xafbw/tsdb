@@ -1,0 +1,2 @@
+/usr/bin/ar qc libAggTree.a CMakeFiles/AggTree.dir/AggTree.cpp.o CMakeFiles/AggTree.dir/Tree.cpp.o CMakeFiles/AggTree.dir/players.cpp.o CMakeFiles/AggTree.dir/keys.cpp.o
+/usr/bin/ranlib libAggTree.a

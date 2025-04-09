@@ -1,0 +1,2 @@
+/usr/bin/ar qc libDPFServer.a CMakeFiles/DPFServer.dir/DPFServer.cpp.o
+/usr/bin/ranlib libDPFServer.a

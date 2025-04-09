@@ -1,0 +1,170 @@
+syntax = "proto3";
+
+option java_package = "ex.grpc";
+
+package dbquery;
+
+// Defines the service
+service Query {
+    // Function invoked to send the request
+    rpc SendListInit (InitListRequest) returns (InitListResponse) {}
+    rpc SendListUpdate (UpdateListRequest) returns (UpdateListResponse) {}
+    rpc SendListBatchedUpdate (BatchedUpdateListRequest) returns (BatchedUpdateListResponse) {}
+
+    rpc SendSPPInit (InitSPPRequest) returns (InitSPPResponse) {}
+    rpc SendSPPUpdate (UpdateSPPRequest) returns (UpdateSPPResponse) {}
+    rpc SendSPPBatchedUpdate (BatchedUpdateSPPRequest) returns (BatchedUpdateSPPResponse) {}
+
+    rpc SendAggQuery (QueryAggRequest) returns (QueryAggResponse) {}
+    rpc SendDEshare (DEshareRequest) returns (DEshareResponse) {}
+    rpc SendGetZshare (ZshareRequest) returns (ZshareResponse) {}
+    rpc SendAgg (AggRequest) returns (AggResponse) {}
+
+}
+
+
+
+service Aggregate {
+    rpc SendSystemInit (InitSystemRequest) returns (InitSystemResponse) {}
+    rpc SendMult (MultRequest) returns (MultResponse) {}
+}
+
+message InitSystemRequest {
+    bytes key = 1;
+}
+
+message InitSystemResponse {
+    bytes result = 1;
+}
+
+message MultRequest {
+    bytes shares0 = 1;
+    bytes shares1 = 2;
+}
+
+message MultResponse {
+    bytes res = 1;
+}
+
+message InitListRequest {
+    bytes id = 1;
+    uint32 window_size = 2;
+}
+
+message InitListResponse {
+    bytes result = 1;
+}
+
+message UpdateListRequest {
+    bytes id = 1;
+    uint32 val = 2;
+    bytes share0 = 3;
+    //bytes share1 = 4;
+}
+
+message BatchedUpdateListRequest {
+    repeated UpdateListRequest updates = 1;
+}
+
+message UpdateListResponse {
+    bytes result = 1;
+}
+
+message BatchedUpdateListResponse {
+    bytes result = 1;
+}
+
+message InitSPPRequest {
+    bytes id = 1;
+    uint32 window_size = 2;
+    uint32 num_buckets = 3;
+    bool malicious = 4;
+}
+
+message InitSPPResponse {
+    bytes result = 1;
+}
+
+message UpdateSPPRequest {
+    bytes id = 1;
+    uint32 val = 2;
+    bytes data0 = 3;
+    bytes a = 4;
+    bytes b = 5;
+    bytes ab = 6;
+}
+
+message BatchedUpdateSPPRequest {
+    repeated UpdateSPPRequest updates = 1;
+}
+
+message UpdateSPPResponse {
+    bytes result = 1;
+}
+
+message BatchedUpdateSPPResponse {
+    bytes result = 1;
+}
+
+message QueryAggRequest {
+    string agg_id = 1;
+    CombinedFilter combined_filter = 2; 
+}
+
+message QueryAggResponse {
+    bytes d_i = 1;
+    bytes e_i = 2;
+    repeated bytes p1 = 3;
+    repeated bytes p2 = 4;
+    //bytes p1 = 3;
+    //bytes p2 = 4;
+    int32 leng0 = 5;    //return Pj (length: windowsize)
+}
+
+message DEshareRequest {
+    bytes dm = 1;
+    bytes em = 2;
+    string num = 3;
+}
+
+message DEshareResponse {
+    bytes d_j = 1;
+    bytes e_j = 2;
+}
+
+message ZshareRequest {
+    bytes d = 1;
+    bytes e = 2;
+    string agg_id = 3;
+}
+
+message ZshareResponse {
+    bytes dv_i = 1;
+    bytes ev_i = 2;
+}
+
+message AggRequest {
+    bytes dv = 1;
+    bytes ev = 2;
+}
+
+message AggResponse {
+    bytes res = 1;
+}
+
+message BaseFilter {
+    string id = 1;
+    bytes key0 = 2;
+    bytes key1 = 3;
+    bool is_point = 4;   // otherwise is range filter
+    repeated int32 s1 = 5;
+    repeated int32 s2 = 6;
+}
+
+message CombinedFilter {
+    repeated BaseFilter base_filters = 1;
+    bool op_is_and = 2;     // otherwise is OR operator
+}
+
+
+
