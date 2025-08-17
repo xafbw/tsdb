@@ -1,6 +1,6 @@
 # TSDB
 
-This is the implementation of our paper: Practical Verifiable Multi-predicate Range Query over Time-Series Database. The testing is performed on Ubuntu 22.04.2 LTS. 
+This is the implementation of our paper: VMPQ: An Efficient Protocol for Privacy-Preserving and Verifiable Multi-Predicate Queries over Time-Series Databases. The testing is performed on Ubuntu 22.04.2 LTS. 
 
 ## Main Phases
 
@@ -26,7 +26,7 @@ TSDB/
 │	├── Query()					 	
 │	├── Answer()				─┤  // SimPraPir
 │	├── Verify()				 
-│	└── refresh()			           ───
+│	└── refresh()			   ───
 ├── server					// server-side codes
 │	├── AddValList()				// initialize value list
 │	├── ValListUpdate()				// update value shares
@@ -44,11 +44,11 @@ TSDB/
 
 The project requires a C++ compiler with C++14 support. The CMake version used is 3.22.1. 
 
-[gRPC](https://grpc.io/) is a modern open source high performance Remote Procedure Call (RPC) framework that can run in any environment. [This guide](https://grpc.io/docs/languages/cpp/quickstart/) gets you started with [gRPC](https://github.com/grpc/grpc) (tested on versions 1.48.1) in C++ with a simple working example.
+[gRPC](https://grpc.io/) is a modern open-source high-performance Remote Procedure Call (RPC) framework that can run in any environment. [This guide](https://grpc.io/docs/languages/cpp/quickstart/) gets you started with [gRPC](https://github.com/grpc/grpc) (tested on versions 1.48.1) in C++ with a simple working example.
 
-[CryptoTools](https://github.com/ladnir/cryptoTools/tree/master) is a portable c++14 library containing a collection of tools for building cryptographic protocols. It includes asynchronous networking, fast cryptographic primitives and several other utilities tailored for implementing protocols.
+[CryptoTools](https://github.com/ladnir/cryptoTools/tree/master) is a portable C++14 library containing a collection of tools for building cryptographic protocols. It includes asynchronous networking, fast cryptographic primitives and several other utilities tailored for implementing protocols.
 
-There are several other library dependencies including [Boost](https://www.boost.org/) (tested on versions 1.74.0), [Relic](https://github.com/relic-toolkit/relic) (tested on versions 0.6.0; the `-DMULTI=OPENMP` flag should be used with `cmake`) and [OpenSSl](https://www.openssl.org/) (tested on versions 1.1.1u). 
+There are several other library dependencies including [Boost](https://www.boost.org/) (tested on versions 1.74.0), [Relic](https://github.com/relic-toolkit/relic) (tested on versions 0.6.0; the `-DMULTI=OPENMP` flag should be used with `cmake`) and [OpenSSL](https://www.openssl.org/) (tested on versions 1.1.1u). 
 
 ## Building
 
@@ -104,7 +104,7 @@ make
 
 4. Wait for the "DONE WITH SETUP" message in each server terminal window before proceeding to the next step.
 
-5. In the third terminal window, start client and run as follows.
+5. In the third terminal window, start the client and run as follows.
 
    ```
    sudo ./build/bin/bench config/client.config
