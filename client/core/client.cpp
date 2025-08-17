@@ -113,53 +113,57 @@ void QueryClient::ValListUpdate(string id, uint32_t idx, uint128_t val, UpdateLi
     }
 }
 
-static struct T
-{
-    int h;
-    int e;
-    uint128_t median;
-    uint128_t P;
-    uint128_t F;
-} t[M_SIZE];
 
-static struct T_
-{
-    int h_;
-    uint128_t median_;
-    uint128_t P_;
-    uint128_t F_;
-} t_[M_SIZE];
+// 定义全局变量
+T* t = nullptr;
+T_* t_ = nullptr;
+Hj hj;
+R* r = nullptr;
+DataS* dataS = nullptr;
+RespP* resP = nullptr;
 
-struct Hj
-{
-    int j;
-    uint128_t G;
-    // int Window_Size;  //In order to work with Pj(length: windowsize), let t[j].P = t[j].P ✖ windowsize。
-} hj;
+// 静态 RAII 管理器
+struct GlobalsManager {
+    GlobalsManager() { init_globals(); }
+    ~GlobalsManager() { free_globals(); }
+} _globals_manager;
 
-static struct R
-{
-    vector<int> S_l;
-    vector<int> S_h; // vector dynamically adds an element, and custom removeElement dynamically removes an element
-    uint128_t res0[N_SIZE];
-    int random_index[N_SIZE];
-} r[M_SIZE];
+void init_globals() {
+    t    = new T[M_SIZE];
+    t_   = new T_[M_SIZE];
+    r    = new R[M_SIZE];
+    dataS = new DataS[N_SIZE * N_SIZE];
+    resP  = new RespP[2];
 
-/*struct Data{
-    int D;
-} data[1024];
-*/
+    for (size_t i = 0; i < M_SIZE; ++i) {
+        r[i].res0 = new uint128_t[N_SIZE];
+        r[i].random_index = new int[N_SIZE];
+    }
 
-static struct DataS
-{
-    uint128_t D[2];       // server = 2
-} dataS[N_SIZE * N_SIZE]; // num_buckets = N_SIZE*N_SIZE
+    for (size_t i = 0; i < 2; ++i) {
+        resP[i].Pj  = new uint128_t[WS];
+        resP[i].Pj_ = new uint128_t[WS];
+    }
+}
 
-static struct RespP
-{
-    uint128_t Pj[WS];  // windowsize
-    uint128_t Pj_[WS]; // windowsize
-} resP[2];             // server = 2
+void free_globals() {
+    for (size_t i = 0; i < M_SIZE; ++i) {
+        delete[] r[i].res0;
+        delete[] r[i].random_index;
+    }
+    delete[] r;
+
+    for (size_t i = 0; i < 2; ++i) {
+        delete[] resP[i].Pj;
+        delete[] resP[i].Pj_;
+    }
+    delete[] resP;
+
+    delete[] t;
+    delete[] t_;
+    delete[] dataS;
+}
+
 
 void QueryClient::AddSPPTable(string id, uint32_t windowSize, uint32_t numBuckets, vector<uint32_t> &data)
 {
