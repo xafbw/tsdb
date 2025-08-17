@@ -75,25 +75,21 @@ void QueryClient::AddValList(string id, uint32_t windowSize, vector<uint128_t> &
 
     /* Load data. */
     BatchedUpdateListRequest reqs[NUM_SERVERS];
-    assert(data.size() >= windowSize);
-    for (int batch = 0; batch < windowSize / UPDATE_CHUNK_SZ + 1; batch++)
-    {
-        for (int i = 0; i < UPDATE_CHUNK_SZ && batch * UPDATE_CHUNK_SZ + i < windowSize; i++)
-        {
+    assert(data.size() >= windowSize); 
+    for (int batch = 0; batch < windowSize / UPDATE_CHUNK_SZ + 1; batch++) {
+        for (int i = 0; i < UPDATE_CHUNK_SZ && batch * UPDATE_CHUNK_SZ + i < windowSize; i++) {
             int idx = batch * UPDATE_CHUNK_SZ + i;
             UpdateListRequest *tmp_reqs[NUM_SERVERS];
-            for (int j = 0; j < NUM_SERVERS; j++)
-            {
+            for (int j = 0; j < NUM_SERVERS; j++) {
                 tmp_reqs[j] = reqs[j].add_updates();
             }
             this->ValListUpdate(id, idx, data[idx], tmp_reqs);
         }
 
-        for (int i = 0; i < NUM_SERVERS; i++)
-        {
+        for (int i = 0; i < NUM_SERVERS; i++) {
             BatchedUpdateListResponse resp;
             ClientContext ctx;
-            // cout << "Doing queryStubs[" << i << "]->SendListBatchedUpdate..." << endl;
+            cout << "Doing queryStubs[" << i << "]->SendListBatchedUpdate..." << endl;
             queryStubs[i]->SendListBatchedUpdate(&ctx, reqs[i], &resp);
         }
     }
