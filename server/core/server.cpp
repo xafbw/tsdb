@@ -215,16 +215,23 @@ void QueryServer::AggFilterQuery(string aggID, const CombinedFilter &filterSpec,
     *e_i = filter1;
 }
 
-struct RespP
-{
-    uint128_t Pj;
-    uint128_t Pj_;
-} resPS[WS]; // windowsize
+RespPS* resPS = nullptr;
 
-/*   struct Data{
-        int D;
-   } data[1024];
-*/
+// RAII 管理器，自动初始化和释放
+struct RespPSManager {
+    RespPSManager() { init_resps_globals(); }
+    ~RespPSManager() { free_resps_globals(); }
+} _resps_manager;
+
+void init_resps_globals() {
+    resPS = new RespPS[WS];
+}
+
+void free_resps_globals() {
+    delete[] resPS;
+    resPS = nullptr;
+}
+
 
 void QueryServer::EvalFilter(uint128_t **filter0, uint128_t **filter1, const CombinedFilter &filterSpec)
 {
