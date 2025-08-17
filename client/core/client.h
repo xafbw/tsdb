@@ -1,6 +1,6 @@
 #ifndef CLIENT_H
 #define CLIENT_H
-#define UPDATE_CHUNK_SZ 10000
+#define UPDATE_CHUNK_SZ 1000 // 10000 控制通信量
 
 #include <grpcpp/grpcpp.h>
 #include "../../network/core/query.grpc.pb.h"
@@ -34,6 +34,53 @@ using grpc::Channel;
 using grpc::ClientContext;
 typedef unsigned __int128 bgi_uint128_t;
 
+struct T {
+    int h;
+    int e;
+    uint128_t median;
+    uint128_t P;
+    uint128_t F;
+};
+
+struct T_ {
+    int h_;
+    uint128_t median_;
+    uint128_t P_;
+    uint128_t F_;
+};
+
+struct Hj {
+    int j;
+    uint128_t G;
+};
+
+struct R {
+    std::vector<int> S_l;
+    std::vector<int> S_h;
+    uint128_t* res0;      // N_SIZE
+    int* random_index;    // N_SIZE
+};
+
+struct DataS {
+    uint128_t D[2];
+};
+
+struct RespP {
+    uint128_t* Pj;    // WS
+    uint128_t* Pj_;   // WS
+};
+
+// 全局变量声明（指针形式）
+extern T* t;
+extern T_* t_;
+extern Hj hj;
+extern R* r;
+extern DataS* dataS;
+extern RespP* resP;
+
+// 初始化和释放函数
+void init_globals();
+void free_globals();
 
 int removeElement(vector<int>& nums, int val);  
 void Hint (uint128_t M, int N, uint64_t *X, uint64_t *X_);  
