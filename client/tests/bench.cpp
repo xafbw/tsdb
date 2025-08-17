@@ -32,13 +32,37 @@ bool simPraPirTest(QueryClient *client, int numBuckets, int windowSize, int numC
     expr.conds = conds;
     q.expr = &expr;
 
-    vector<uint128_t> dataVals(windowSize, (uint128_t)1);
-    vector<uint32_t> simPraPirVals(windowSize, (uint32_t)1);
-
-    cout << "Doing AddValList..." << endl;
-    client->AddValList(string("test_vals"), windowSize, dataVals);
-    cout << "Doing AddSPPTable..." << endl;
-    client->AddSPPTable(string("test_spp"), windowSize, numBuckets, simPraPirVals);
+    
+    float totalMI = 0.0;
+    float avgMI = 0.0;
+    float avgI = 0.0;
+    for (int i = 0; i < reps; i++) {
+        INIT_TIMER;
+        START_TIMER;
+            
+        vector<uint128_t> dataVals(windowSize, (uint128_t)1);
+        vector<uint32_t> simPraPirVals(windowSize, (uint32_t)1);
+    
+        cout << "Doing AddValList..." << endl;
+        client->AddValList(string("test_vals"), windowSize, dataVals);
+        cout << "Doing AddSPPTable..." << endl;
+        client->AddSPPTable(string("test_spp"), windowSize, numBuckets, simPraPirVals);
+        
+        uint32_t time = STOP_TIMER_();
+        times.push_back(time);
+        cout << "********************************************" << endl;
+        cout << "reps[" << i << "]: " << time << " milliseconds" << endl;
+        totalMI += time;
+        avgMI = totalMI/reps;
+        avgI = avgMI/1000;
+        //STOP_TIMER("AggQuery");
+    }
+    cout << "######################################################################################" << endl;
+    cout << "totalMI: " << totalMI << " milliseconds" << endl;
+    //cout << "avgMs: " << avgMs << " milliseconds" << endl;
+    cout << "avgMI: " << fixed << setprecision(3) << avgMI << " milliseconds" << endl;
+    cout << "avgI: " << fixed << setprecision(5) << avgI << " seconds" << endl;
+    cout << "######################################################################################" << endl;
 
     // test for AddValList and AddSPPTable
     /*
