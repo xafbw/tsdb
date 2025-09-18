@@ -217,7 +217,6 @@ void QueryServer::AggFilterQuery(string aggID, const CombinedFilter &filterSpec,
 
 RespPS* resPS = nullptr;
 
-// RAII 管理器，自动初始化和释放
 struct RespPSManager {
     RespPSManager() { init_resps_globals(); }
     ~RespPSManager() { free_resps_globals(); }
