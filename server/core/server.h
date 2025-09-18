@@ -42,10 +42,8 @@ struct RespPS {
     uint128_t Pj_;
 };
 
-// 全局变量声明
 extern RespPS* resPS;
 
-// 初始化与释放
 void init_resps_globals();
 void free_resps_globals();
 
