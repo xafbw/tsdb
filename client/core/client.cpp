@@ -43,9 +43,9 @@ using namespace dorydb;
 using namespace osuCrypto;
 using namespace std;
 
-#define M_SIZE 1920 // 1.5 * u* sqrt(numBuckets)
-#define N_SIZE 16   // sqrt(numBuckets)
-#define WS 16       // 2^log_windowsize
+#define M_SIZE 1920 
+#define N_SIZE 16   
+#define WS 16       
 
 QueryClient::QueryClient(vector<shared_ptr<grpc::Channel>> channels, bool malicious)
 {
@@ -110,7 +110,6 @@ void QueryClient::ValListUpdate(string id, uint32_t idx, uint128_t val, UpdateLi
 }
 
 
-// 定义全局变量
 T* t = nullptr;
 T_* t_ = nullptr;
 Hj hj;
@@ -118,7 +117,7 @@ R* r = nullptr;
 DataS* dataS = nullptr;
 RespP* resP = nullptr;
 
-// 静态 RAII 管理器
+
 struct GlobalsManager {
     GlobalsManager() { init_globals(); }
     ~GlobalsManager() { free_globals(); }
@@ -175,7 +174,7 @@ void QueryClient::AddSPPTable(string id, uint32_t windowSize, uint32_t numBucket
         ClientContext ctx;
         req.set_id(id);
         req.set_window_size(windowSize);
-        // hj.Window_Size = windowSize;                                                //in order to work with Pj(size:windowsize)，let t[j].P = t[j].P ✖ windowsize。
+        // hj.Window_Size = windowSize;                                    
         req.set_num_buckets(numBuckets);
         req.set_malicious(malicious);
         // cout << "Doing queryStubs[" << i << "]->SendSPPInit..." << endl;
