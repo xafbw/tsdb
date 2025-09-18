@@ -1,6 +1,6 @@
 #ifndef CLIENT_H
 #define CLIENT_H
-#define UPDATE_CHUNK_SZ 1000 // 10000 控制通信量
+#define UPDATE_CHUNK_SZ 4000 // 10000 
 
 #include <grpcpp/grpcpp.h>
 #include "../../network/core/query.grpc.pb.h"
@@ -70,7 +70,6 @@ struct RespP {
     uint128_t* Pj_;   // WS
 };
 
-// 全局变量声明（指针形式）
 extern T* t;
 extern T_* t_;
 extern Hj hj;
@@ -78,7 +77,6 @@ extern R* r;
 extern DataS* dataS;
 extern RespP* resP;
 
-// 初始化和释放函数
 void init_globals();
 void free_globals();
 
